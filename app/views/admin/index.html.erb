@@ -45,8 +45,10 @@
 <% content_for :foot do %>
 	<script>
 	<% @products.each do |product| %>
-	jQuery('#datetimepicker1<%= product.id %>').datetimepicker();
-	jQuery('#datetimepicker2<%= product.id %>').datetimepicker();
+	$(document).ready(function(){
+	$('#datetimepicker1<%= product.id %>').datetimepicker();
+	$('#datetimepicker2<%= product.id %>').datetimepicker();
+	});
 	<% end %>
 	</script>
 <% end %>
