@@ -1,26 +1,46 @@
 <% if user_signed_in? %>
+
+<% if @products %>
 <div class="row">
 <% @products.each do |product| %>
-	<% if product.promotion>0 %>
 	<div class="col-sm-3 text-center">
-			<h2><%= product.title %></h2>
+			<h2>#<%=product.id%> <%= product.title %></h2>
 	    	<%=image_tag product.image, :class=>"img-responsive" %>
 	    	<br/>	    	
 	    	<span class="price"> <s><%= product.unitprice %></s> </span> 
-	    	<span class="sale"> <%= product.unitprice*product.promotion/100 %> </span>
+	    	<span class="sale"> <%= product.unitprice*(100-product.promotion)/100 %> </span>
 			<%= product.stock %> Left
 			<br/>	From :  <%= product.p_start %>
 			<br/> To: <%= product.p_end %>
 			<br/>
-			<button class="btn btn-danger btn-buy">BUY</button>
+			<%= form_for :buynow, url: home_buynow_path do |f| %>
+			<input type="hidden" name="id" value="<%= product.id %>">
+			<button class="btn btn-danger btn-buy">BUY NOW</button>
+			<% end %>
  	</div>
- 	<% end %>
 <% end %>
 </div>
-<% else %>
+
+<% elsif @orders %>
 <div class="row">
 	<div class="col-sm-12">
-		<h1>Hello!</h1>
+	  <table class="table">
+	    <tr>
+	    	<th>Product ID</th>
+	    	<th>Price</th>
+	    	<th>QTY</th>
+	    	<th>Date</th>
+	    </tr>
+	    <% @orders.each do |order|%>
+	    <tr>
+	    	<td><%= order.product_id%></td>
+	    	<td><%= order.price%></td>
+	    	<td><%= order.qty%></td>
+	    	<td><%= order.created_at%></td>
+	    </tr>
+	   <% end %>
+	  </table>		
 	</div>
 </div>
+<% end %>
 <% end %>

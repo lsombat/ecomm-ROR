@@ -8,6 +8,3 @@ or
 $ psql ecomm  < ecomm
 
 $ rails server
-
------------------------
-For Admin : /admin/index

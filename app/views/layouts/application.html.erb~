@@ -18,17 +18,23 @@
                 <span class="icon-bar"></span>
             </button>
 
-            <div class="navbar-brand">E commerce</div>
+            <a href="/" class="navbar-brand">E commerce</a>
 
         </div>
 
         <div class="collapse navbar-collapse" id="bs-mk-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li><a  href="#">Home</a></li>
+            <% if user_signed_in? %>
+                <li><a  href="/home/index">Home</a></li>
+                <li><a  href="/home/show">My Cart</a></li>
+            <% end %> 
                 
             </ul>
             <ul class="nav navbar-nav navbar-right">
                    <% if user_signed_in? %>
+                   <li>
+						  <a href="#">Credits : <%= current_user.credits %></a>        
+						  </li>
 						  <li>
 						  <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>        
 						  </li>

@@ -3,7 +3,6 @@
 <head>
   <title>Ecommerce</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -18,13 +17,15 @@
                 <span class="icon-bar"></span>
             </button>
 
-            <div class="navbar-brand">E commerce</div>
+            <a href="/" class="navbar-brand">E commerce</a>
 
         </div>
 
         <div class="collapse navbar-collapse" id="bs-mk-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li><a  href="#">Dashboard</a></li>
+                <% if admin_signed_in? %>
+                <li><a  href="/admin/index">Dashboard</a></li>
+                <% end %>
                 
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -48,5 +49,8 @@
 <div class="container">
 	<%= yield %>
 </div>
+<%= javascript_include_tag "application" %>
+<%= javascript_include_tag  "jquery.datetimepicker.full.min" %>
+<%= yield :foot %>
 </body>
 </html>

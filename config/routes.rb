@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
   get 'welcome/index'
   get 'home/index'
+  get 'home/show'
   get 'admin/index'
+  post 'admin/update'
+  post 'home/buynow'
   root to: "welcome#index"
   devise_for :users, path: "auth", path_names: { sign_in: 'login', sign_out: 'logout', password: 'secret', confirmation: 'verification', unlock: 'unblock', registration: 'register', sign_up: 'cmon_let_me_in' }
   devise_for :admins, path: "admin", path_names: { sign_in: 'login', sign_out: 'logout', password: 'secret', confirmation: 'verification', unlock: 'unblock', registration: 'register', sign_up: 'cmon_let_me_in' }  

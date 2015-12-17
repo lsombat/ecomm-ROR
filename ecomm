@@ -74,6 +74,44 @@ ALTER SEQUENCE admins_id_seq OWNED BY admins.id;
 
 
 --
+-- Name: orders; Type: TABLE; Schema: public; Owner: pbbb; Tablespace: 
+--
+
+CREATE TABLE orders (
+    id integer NOT NULL,
+    product_id integer,
+    user_id integer,
+    price double precision,
+    qty integer DEFAULT 1,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE orders OWNER TO pbbb;
+
+--
+-- Name: orders_id_seq; Type: SEQUENCE; Schema: public; Owner: pbbb
+--
+
+CREATE SEQUENCE orders_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE orders_id_seq OWNER TO pbbb;
+
+--
+-- Name: orders_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: pbbb
+--
+
+ALTER SEQUENCE orders_id_seq OWNED BY orders.id;
+
+
+--
 -- Name: products; Type: TABLE; Schema: public; Owner: pbbb; Tablespace: 
 --
 
@@ -144,7 +182,8 @@ CREATE TABLE users (
     current_sign_in_ip character varying,
     last_sign_in_ip character varying,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    credits double precision DEFAULT 5000
 );
 
 
@@ -182,6 +221,13 @@ ALTER TABLE ONLY admins ALTER COLUMN id SET DEFAULT nextval('admins_id_seq'::reg
 -- Name: id; Type: DEFAULT; Schema: public; Owner: pbbb
 --
 
+ALTER TABLE ONLY orders ALTER COLUMN id SET DEFAULT nextval('orders_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: pbbb
+--
+
 ALTER TABLE ONLY products ALTER COLUMN id SET DEFAULT nextval('products_id_seq'::regclass);
 
 
@@ -197,7 +243,7 @@ ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regcl
 --
 
 COPY admins (id, email, encrypted_password, reset_password_token, reset_password_sent_at, remember_created_at, sign_in_count, current_sign_in_at, last_sign_in_at, current_sign_in_ip, last_sign_in_ip, created_at, updated_at) FROM stdin;
-1	x@x.x	$2a$10$s9IKW9cxLoP3q1nmDPmtT.JrhwAlLHrONjCaLMLM0Ys/7cHlknUTW	\N	\N	\N	2	2015-12-17 04:55:27.136474	2015-12-17 04:21:09.638345	127.0.0.1	127.0.0.1	2015-12-17 04:21:09.599545	2015-12-17 04:55:27.137394
+1	x@x.x	$2a$10$s9IKW9cxLoP3q1nmDPmtT.JrhwAlLHrONjCaLMLM0Ys/7cHlknUTW	\N	\N	\N	7	2015-12-17 13:24:12.998634	2015-12-17 12:02:07.65073	127.0.0.1	127.0.0.1	2015-12-17 04:21:09.599545	2015-12-17 13:24:12.999693
 \.
 
 
@@ -209,14 +255,32 @@ SELECT pg_catalog.setval('admins_id_seq', 1, true);
 
 
 --
+-- Data for Name: orders; Type: TABLE DATA; Schema: public; Owner: pbbb
+--
+
+COPY orders (id, product_id, user_id, price, qty, created_at, updated_at) FROM stdin;
+1	3	1	89.7000000000000028	1	2015-12-17 12:51:49.668695	2015-12-17 12:51:49.668695
+2	4	1	79.7999999999999972	1	2015-12-17 13:23:37.742605	2015-12-17 13:23:37.742605
+3	2	1	79.5999999999999943	1	2015-12-17 13:27:14.22516	2015-12-17 13:27:14.22516
+\.
+
+
+--
+-- Name: orders_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pbbb
+--
+
+SELECT pg_catalog.setval('orders_id_seq', 3, true);
+
+
+--
 -- Data for Name: products; Type: TABLE DATA; Schema: public; Owner: pbbb
 --
 
 COPY products (id, title, description, image, unitprice, stock, promotion, p_start, p_end, status, created_at, updated_at) FROM stdin;
-1	abcd	good abcd	alpha2-2.jpg	99	100	50	2015-12-17 00:00:00	2015-12-31 00:00:00	\N	2015-12-17 00:00:00	2015-12-17 00:00:00
-2	abab	very good abab	alpha2-1.jpg	199	100	60	2015-12-17 00:00:00	2015-12-31 00:00:00	\N	2015-12-17 00:00:00	2015-12-17 00:00:00
-3	Alpha4	super Alpha	alpha2-2.jpg	299	100	70	2015-12-17 00:00:00	2015-12-31 00:00:00	\N	2015-12-17 00:00:00	2015-12-17 00:00:00
-4	Alpha5	Stronger Together	alpha2-1.jpg	399	100	0	2015-12-17 00:00:00	2015-12-31 00:00:00	\N	2015-12-17 00:00:00	2015-12-17 00:00:00
+3	Alpha4	super Alpha	alpha2-2.jpg	299	100	70	2015-12-18 21:00:00	2015-12-18 22:00:00	\N	2015-12-17 00:00:00	2015-12-17 10:36:25.989964
+4	Alpha5	Stronger Together	alpha2-1.jpg	399	100	80	2015-12-18 09:00:00	2015-12-18 16:00:00	\N	2015-12-17 00:00:00	2015-12-17 11:13:08.694584
+1	abcd	good abcd	alpha2-2.jpg	99	100	0	2015-12-17 00:00:00	2015-12-31 00:00:00	\N	2015-12-17 00:00:00	2015-12-17 11:13:15.995596
+2	abab	very good abab	alpha2-1.jpg	199	99	60	2015-12-17 00:00:00	2015-12-31 00:00:00	\N	2015-12-17 00:00:00	2015-12-17 13:27:14.317991
 \.
 
 
@@ -235,6 +299,7 @@ COPY schema_migrations (version) FROM stdin;
 20151216182717
 20151217000959
 20151217020151
+20151217123037
 \.
 
 
@@ -242,8 +307,8 @@ COPY schema_migrations (version) FROM stdin;
 -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: pbbb
 --
 
-COPY users (id, email, encrypted_password, reset_password_token, reset_password_sent_at, remember_created_at, sign_in_count, current_sign_in_at, last_sign_in_at, current_sign_in_ip, last_sign_in_ip, created_at, updated_at) FROM stdin;
-1	x@x.x	$2a$10$7VU0xXtc1kJPASLNYTa07uEQbz8uvPJnUJQN4PbLSbUFZ9yv.ZeZ6	\N	\N	\N	7	2015-12-17 06:32:48.861029	2015-12-17 06:23:21.957581	127.0.0.1	127.0.0.1	2015-12-17 04:20:39.934059	2015-12-17 06:32:48.862253
+COPY users (id, email, encrypted_password, reset_password_token, reset_password_sent_at, remember_created_at, sign_in_count, current_sign_in_at, last_sign_in_at, current_sign_in_ip, last_sign_in_ip, created_at, updated_at, credits) FROM stdin;
+1	x@x.x	$2a$10$7VU0xXtc1kJPASLNYTa07uEQbz8uvPJnUJQN4PbLSbUFZ9yv.ZeZ6	\N	\N	\N	19	2015-12-17 13:27:08.53713	2015-12-17 12:02:20.402006	127.0.0.1	127.0.0.1	2015-12-17 04:20:39.934059	2015-12-17 13:27:14.307354	4750.89999999999964
 \.
 
 
@@ -260,6 +325,14 @@ SELECT pg_catalog.setval('users_id_seq', 1, true);
 
 ALTER TABLE ONLY admins
     ADD CONSTRAINT admins_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: orders_pkey; Type: CONSTRAINT; Schema: public; Owner: pbbb; Tablespace: 
+--
+
+ALTER TABLE ONLY orders
+    ADD CONSTRAINT orders_pkey PRIMARY KEY (id);
 
 
 --

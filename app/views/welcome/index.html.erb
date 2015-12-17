@@ -1,6 +1,7 @@
 <div class="row">
+<% if !@products.empty? %>
 <% @products.each do |product| %>
-	<% if product.promotion>0 %>
+
 	<div class="col-sm-4 text-center">
 	    	<%=image_tag product.image, :class=>"img-responsive" %>
 	    	<br/>
@@ -12,8 +13,11 @@
 			<br/>
 			<span class="sale">SALE UP TO <%= product.promotion %> % </span>
 			<br/>
-			From :  <%= product.p_start %> To: <%= product.p_end %>
+			From :  <%= product.p_start.to_time.strftime('%a %b %d %H:%M:%S %Z %Y') %> 
+			<br/>			
+			To: <%= product.p_end.to_time.strftime('%a %b %d %H:%M:%S %Z %Y') %>
  	</div>
- 	<% end %>
+
+<% end %>
 <% end %>
 </div>
