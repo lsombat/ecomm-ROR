@@ -14,4 +14,4 @@
  *= require_self
  */
  
- .padtp {margin-top: 50px; }
+ .padtp50 { margin-top: 50px; }

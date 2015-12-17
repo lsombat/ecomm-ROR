@@ -1,7 +1,7 @@
 <div class="row">
 <% @products.each do |product| %>
 	<% if product.promotion>0 %>
-	<div class="col-sm-4 text-center">
+	<div class="col-sm-6 text-center">
 	    	<%=image_tag product.image, :class=>"img-responsive" %>
 	    	<br/>
 	    	<h2><%= product.title %></h2>

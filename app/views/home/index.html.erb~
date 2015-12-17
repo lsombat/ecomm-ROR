@@ -1,6 +1,26 @@
+<% if user_signed_in? %>
+<div class="row">
+<% @products.each do |product| %>
+	<% if product.promotion>0 %>
+	<div class="col-sm-3 text-center">
+			<h2><%= product.title %></h2>
+	    	<%=image_tag product.image, :class=>"img-responsive" %>
+	    	<br/>	    	
+	    	<span class="price"> <s><%= product.unitprice %></s> </span> 
+	    	<span class="sale"> <%= product.unitprice*product.promotion/100 %> </span>
+			<%= product.stock %> Left
+			<br/>	From :  <%= product.p_start %>
+			<br/> To: <%= product.p_end %>
+			<br/>
+			<button class="btn btn-danger btn-buy">BUY</button>
+ 	</div>
+ 	<% end %>
+<% end %>
+</div>
+<% else %>
 <div class="row">
 	<div class="col-sm-12">
-		<h1>Home#index</h1>
-		<p>Find me in app/views/home/index.html.erb</p>
+		<h1>Hello!</h1>
 	</div>
 </div>
+<% end %>
