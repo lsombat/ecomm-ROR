@@ -44,10 +44,13 @@
 
 <% content_for :foot do %>
 	<script>
-	<% @products.each do |product| %>
-	jQuery('#datetimepicker1<%= product.id %>').datetimepicker();
-	jQuery('#datetimepicker2<%= product.id %>').datetimepicker();
+	var $j = jQuery.noConflict();
+	$(document).ready(function(){
+	<% @products.each do |product| %>	
+	$j('#datetimepicker1<%= product.id %>').datetimepicker();
+	$j('#datetimepicker2<%= product.id %>').datetimepicker();	
 	<% end %>
+	});
 	</script>
 <% end %>
 
