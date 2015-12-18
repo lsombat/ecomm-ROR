@@ -6,7 +6,7 @@ class CreateProducts < ActiveRecord::Migration
       t.string :image
       t.float :unitprice
       t.integer :stock
-      t.integer :promotion
+      t.integer :promotion,default: 0
       t.datetime :p_start
       t.datetime :p_end
       t.integer :status

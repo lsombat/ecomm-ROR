@@ -2,9 +2,9 @@ Rails.application.routes.draw do
   get 'welcome/index'
   get 'home/index'
   get 'home/show'
+  post 'home/buynow'
   get 'admin/index'
   post 'admin/update'
-  post 'home/buynow'
   root to: "welcome#index"
   devise_for :users, path: "auth", path_names: { sign_in: 'login', sign_out: 'logout', password: 'secret', confirmation: 'verification', unlock: 'unblock', registration: 'register', sign_up: 'cmon_let_me_in' }
   devise_for :admins, path: "admin", path_names: { sign_in: 'login', sign_out: 'logout', password: 'secret', confirmation: 'verification', unlock: 'unblock', registration: 'register', sign_up: 'cmon_let_me_in' }  
@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
+     resources :products
 
   # Example resource route with options:
   #   resources :products do

@@ -26,7 +26,8 @@
             <ul class="nav navbar-nav">
             <% if user_signed_in? %>
                 <li><a  href="/home/index">Home</a></li>
-                <li><a  href="/home/show">My Cart</a></li>
+                <li><a  href="/home/show">Buy</a></li>
+                <li><a  href="/products/index">Sell</a></li>
             <% end %> 
                 
             </ul>

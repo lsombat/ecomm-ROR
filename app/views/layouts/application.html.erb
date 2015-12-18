@@ -3,7 +3,6 @@
 <head>
   <title>Ecommerce</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -26,7 +25,8 @@
             <ul class="nav navbar-nav">
             <% if user_signed_in? %>
                 <li><a  href="/home/index">Home</a></li>
-                <li><a  href="/home/show">My Orders</a></li>
+                <li><a  href="/home/show">Buy</a></li>
+                <li><a  href="/products">Sell</a></li>
             <% end %> 
                 
             </ul>
@@ -54,5 +54,7 @@
 <div class="container">
 	<%= yield %>
 </div>
+<%= javascript_include_tag "application" %>
+<%= yield :foot %>
 </body>
 </html>

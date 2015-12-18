@@ -1,0 +1,76 @@
+<% if user_signed_in? %>
+
+<% if @products %>
+<div class="row">
+	<div class="col-sm-12">
+		<h1>Listing Products</h1>
+		<table class="table">
+		  <tr>
+		    <th>Photo</th>
+		    <th>Title</th>
+		    <th>Description</th>
+		    <th>Unit Price</th>
+		    <th>Stock</th>
+		    <th>Promotion %</th>
+		    <th>Start</th>
+		    <th>End</th>
+		    <th>Action</th>
+		  </tr>
+		 
+		  <% @products.each do |product| %>
+		    <tr>
+		      <td><%=image_tag product.image, :class=>"img-responsive", :style=>"height:80px;" %></td>
+		      <td><%= product.title %></td>
+		      <td><%= product.description %></td>
+		      <td><%= product.unitprice %></td>
+		      <td><%= product.stock %></td>
+		      <% @url = "/products/"+product.id.to_s %>
+		      <%= form_for :update_product, url: @url, method: :put do |f| %>
+		      <input type="hidden" name="id" value="<%= product.id %>">
+		      <td><input type="text" class="form-control" name="promotion" value="<%= product.promotion %>"></td>
+		      <td><input id="datetimepicker1<%= product.id %>" type="text" class="form-control" name="p_start" value="<%= product.p_start %>"></td>
+		      <td><input id="datetimepicker2<%= product.id %>" type="text" class="form-control" name="p_end" value="<%= product.p_end %>"></td>
+				<td><%= f.submit "update", :class=>'btn btn-primary' %></td>				
+				<% end %>		    
+		    </tr>
+		  <% end %>
+		</table>
+	</div>
+</div>
+
+<% elsif @orders %>
+<div class="row">
+	<div class="col-sm-12">
+	  <table class="table">
+	    <tr>
+	    	<th>Product ID</th>
+	    	<th>Price</th>
+	    	<th>QTY</th>
+	    	<th>Date</th>
+	    </tr>
+	    <% @orders.each do |order|%>
+	    <tr>
+	    	<td>#<%= order.product_id%></td>
+	    	<td><%= order.price%></td>
+	    	<td><%= order.qty%></td>
+	    	<td><%= order.created_at%></td>
+	    </tr>
+	   <% end %>
+	  </table>		
+	</div>
+</div>
+<% end %>
+<% end %>
+
+<% content_for :foot do %>
+	<script>
+	
+	$(document).ready(function(){
+	var $j = jQuery.noConflict();
+	<% @products.each do |product| %>	
+	$j('#datetimepicker1<%= product.id %>').datetimepicker();
+	$j('#datetimepicker2<%= product.id %>').datetimepicker();	
+	<% end %>
+	});
+	</script>
+<% end %>

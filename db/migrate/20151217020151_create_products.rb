@@ -10,6 +10,7 @@ class CreateProducts < ActiveRecord::Migration
       t.datetime :p_start
       t.datetime :p_end
       t.integer :status
+      t.integer :user_id
 
       t.timestamps null: false
     end

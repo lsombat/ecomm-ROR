@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
   def index 
   if current_user
-     @products = Product.where("promotion>0").where("p_end>=?",Time.now)
+     @products = Product.where("promotion>0").where("p_end>=?",Time.now).where("user_id!=?",current_user.id)
    else
      redirect_to new_user_session_path, notice: 'You are not logged in.'
    end
