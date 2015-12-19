@@ -1,8 +1,39 @@
 <% if user_signed_in? %>
+<div class="row">
+	<div class="col-sm-12 table-responsive">
+		<h1>Add New Product</h1>
+		<table class="table">
+		  <tr>
+			    <th>Photo</th>
+			    <th>Title</th>
+			    <th>Description</th>
+			    <th>Unit Price</th>
+			    <th>Stock</th>
+			    <th>Promotion %</th>
+			    <th>Start</th>
+			    <th>End</th>
+			    <th>Action</th>
+		  </tr>
+		   <%= form_for :product, url: products_path, method: :post do |f| %>
+		  <tr>
+			  	 <td><%= f.file_field:image, :class=>"form-control", :required=>"true" %></td>
+			  	 <td><%= f.text_field:title, :class=>"form-control", :required=>"true"%></td>
+			  	 <td><%= f.text_field:description, :class=>"form-control", :required=>"true"%></td>
+			  	 <td><%= f.text_field:unitprice, :class=>"form-control", :required=>"true"%></td>
+			  	 <td><%= f.text_field:stock, :class=>"form-control", :required=>"true"%></td>
+			  	 <td><%= f.text_field:promotion, :class=>"form-control"%></td>
+			  	 <td><%= f.text_field:p_start, :class=>"form-control", :id=>"new_p_start"%></td>
+			  	 <td><%= f.text_field:p_end, :class=>"form-control", :id=>"new_p_end"%></td>
+			  	 <td><%= f.submit "add", :class=>'btn btn-primary' %></td>
+		  </tr>
+		  <% end %>
+		</table>
+	</div>
+</div>	
 
 <% if @products %>
 <div class="row">
-	<div class="col-sm-12">
+	<div class="col-sm-12 table-responsive">
 		<h1>Listing Products</h1>
 		<table class="table">
 		  <tr>
@@ -67,6 +98,8 @@
 	
 	$(document).ready(function(){
 	var $j = jQuery.noConflict();
+	$j('#new_p_start').datetimepicker();
+	$j('#new_p_end').datetimepicker();
 	<% @products.each do |product| %>	
 	$j('#datetimepicker1<%= product.id %>').datetimepicker();
 	$j('#datetimepicker2<%= product.id %>').datetimepicker();	

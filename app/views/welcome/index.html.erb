@@ -3,19 +3,17 @@
 <% @products.each do |product| %>
 
 	<div class="col-sm-4 text-center">
+	      <h2><%= product.title %></h2>
 	    	<%=image_tag product.image, :class=>"img-responsive" %>
-	    	<br/>
-	    	<h2><%= product.title %></h2>
+	    	<br/>	    	
 	    	<span class="price"> <s><%= product.unitprice %></s> </span> 
 	    	<span class="sale"> <%= product.unitprice*(100-product.promotion)/100 %> </span>
 	    	<br/>
 			only <%= product.stock %> Left
 			<br/>
 			<span class="sale">SALE UP TO <%= product.promotion %> % </span>
-			<br/>
-			From :  <%= product.p_start.to_time.strftime('%a %b %d %H:%M:%S %Z %Y') %> 
-			<br/>			
-			To: <%= product.p_end.to_time.strftime('%a %b %d %H:%M:%S %Z %Y') %>
+			<br/>		
+			<h4>Before: <%= product.p_end.to_time.strftime('%a %b %d, %Y %H:%M:%S') %></h4>
  	</div>
 
 <% end %>
