@@ -26,14 +26,14 @@
 	<div class="col-sm-12">
 	  <table class="table">
 	    <tr>
-	    	<th>Product ID</th>
+	    	<th>Product ID : Title </th>
 	    	<th>Price</th>
 	    	<th>QTY</th>
 	    	<th>Date</th>
 	    </tr>
 	    <% @orders.each do |order|%>
 	    <tr>
-	    	<td>#<%= order.product_id%> <%= order.product.title%></td>
+	    	<td>#<%= order.product_id%> : <%= order.product.title%></td>
 	    	<td><%= order.price%></td>
 	    	<td><%= order.qty%></td>
 	    	<td><%= order.created_at.to_time.strftime('%a %b %d, %Y %H:%M:%S')%></td>
