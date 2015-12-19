@@ -56,12 +56,12 @@
 		      <td><%= product.unitprice %></td>
 		      <td><%= product.stock %></td>
 		      <% @url = "/products/"+product.id.to_s %>
-		      <%= form_for :update_product, url: @url, method: :put do |f| %>
-		      <input type="hidden" name="id" value="<%= product.id %>">
-		      <td><input type="text" class="form-control" name="promotion" value="<%= product.promotion %>"></td>
-		      <td><input id="datetimepicker1<%= product.id %>" type="text" class="form-control" name="p_start" value="<%= product.p_start %>"></td>
-		      <td><input id="datetimepicker2<%= product.id %>" type="text" class="form-control" name="p_end" value="<%= product.p_end %>"></td>
-				<td><%= f.submit "update", :class=>'btn btn-primary' %></td>				
+		      <%= form_for :product, url: @url, method: :put do |f| %>
+		      <%= f.hidden_field:id, :value=>product.id %>
+		      <td><%= f.text_field:promotion, :value=>product.promotion, :class=>"form-control" %></td>
+		      <td><%= f.text_field:p_start, :value=>product.p_start, :class=>"form-control", :id=>"datetimepicker1"+product.id.to_s %></td>
+		      <td><%= f.text_field:p_end, :value=>product.p_end, :class=>"form-control", :id=>"datetimepicker2"+product.id.to_s %></td>
+		    	<td><%= f.submit "update", :class=>'btn btn-primary' %></td>				
 				<% end %>		    
 		    </tr>
 		  <% end %>

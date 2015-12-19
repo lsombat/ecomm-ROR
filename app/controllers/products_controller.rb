@@ -43,7 +43,7 @@ end
 
  private
  def product_params
-   params.permit(:id,:promotion,:p_start,:p_end)
+   params[:product].permit(:id,:promotion,:p_start,:p_end)
  end
  def newproduct_params
    params[:product].permit(:image,:user_id,:title,:description,:unitprice,:stock,:promotion,:p_start,:p_end)

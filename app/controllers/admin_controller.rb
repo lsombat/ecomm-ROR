@@ -7,7 +7,7 @@ class AdminController < ApplicationController
 		   end
   	end
   	def update
-  	     @product = Product.find(params[:id])
+  	     @product = Product.find(params[:product][:id])
 		  
 		  if @product.update(product_params)
         redirect_to admin_index_path
@@ -19,6 +19,6 @@ class AdminController < ApplicationController
   	
   	 private
     def product_params
-      params.permit(:id,:promotion,:p_start,:p_end)
+      params[:product].permit(:id,:promotion,:p_start,:p_end)
     end
 end
