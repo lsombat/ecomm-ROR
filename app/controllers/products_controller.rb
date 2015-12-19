@@ -9,6 +9,7 @@ def index
 end
 
 def create
+      if current_user
 		uploaded_io = params[:product][:image]
 		@fname = current_user.id.to_s + Time.now.to_i.to_s+uploaded_io.original_filename
 		params[:product][:image]=@fname
@@ -24,6 +25,10 @@ def create
 	    else
 	      redirect_to products_path, notice: 'FAIL'
 	    end 
+	    
+	   else
+	     redirect_to new_user_session_path, notice: 'You are not logged in.'
+	   end
 end
 
 def update

@@ -10,8 +10,8 @@
 	    	<span class="price"> <s><%= product.unitprice %></s> </span> 
 	    	<span class="sale"> <%= product.unitprice*(100-product.promotion)/100 %> </span>
 			<%= product.stock %> Left
-			<br/>	From :  <%= product.p_start.to_time.strftime('%a %b %d, %Y %H:%M:%S %Z') %>
-			<br/> To: <%= product.p_end.to_time.strftime('%a %b %d, %Y %H:%M:%S %Z') %>
+			<br/>	From :  <%= product.p_start.to_time.strftime('%a %b %d, %Y %H:%M:%S') %>
+			<br/> To: <%= product.p_end.to_time.strftime('%a %b %d, %Y %H:%M:%S') %>
 			<br/>
 			<%= form_for :buynow, url: home_buynow_path do |f| %>
 			<input type="hidden" name="id" value="<%= product.id %>">
@@ -36,7 +36,7 @@
 	    	<td>#<%= order.product_id%></td>
 	    	<td><%= order.price%></td>
 	    	<td><%= order.qty%></td>
-	    	<td><%= order.created_at.to_time.strftime('%a %b %d, %Y %H:%M:%S %Z')%></td>
+	    	<td><%= order.created_at.to_time.strftime('%a %b %d, %Y %H:%M:%S')%></td>
 	    </tr>
 	   <% end %>
 	  </table>		
