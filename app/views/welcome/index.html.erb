@@ -2,7 +2,7 @@
 <% if !@products.empty? %>
 <% @products.each do |product| %>
 
-	<div class="col-sm-4 text-center">
+	<div class="col-sm-4 text-center" style="height:500px">
 	      <h2><%= product.title %></h2>
 	    	<%=image_tag product.image, :class=>"img-responsive" %>
 	    	<br/>	    	
