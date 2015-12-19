@@ -33,7 +33,7 @@
 	    </tr>
 	    <% @orders.each do |order|%>
 	    <tr>
-	    	<td>#<%= order.product_id%></td>
+	    	<td>#<%= order.product_id%> <%= order.product.title%></td>
 	    	<td><%= order.price%></td>
 	    	<td><%= order.qty%></td>
 	    	<td><%= order.created_at.to_time.strftime('%a %b %d, %Y %H:%M:%S')%></td>

@@ -9,7 +9,7 @@ class HomeController < ApplicationController
   
   def show 
   if current_user
-     @orders = Order.where("user_id=?",current_user.id)
+     @orders =Order.includes(:product).where("user_id=?",current_user.id)
      render 'index'
    else
      redirect_to new_user_session_path, notice: 'You are not logged in.'
@@ -22,7 +22,7 @@ class HomeController < ApplicationController
 		 if @product
 		    @discount = @product.unitprice*(100-@product.promotion)/100
         if current_user.credits>= @discount
-          @newOrder = Order.create({product_id:@product.id,user_id:current_user.id,price:@discount})
+          @newOrder = @product.orders.create({user_id:current_user.id,price:@discount})
           @remaincredits = current_user.credits-@discount
           if current_user.update({credits:@remaincredits})
             @remainstock = @product.stock-1
