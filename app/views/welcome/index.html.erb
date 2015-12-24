@@ -3,17 +3,22 @@
 <% @products.each do |product| %>
 
 	<div class="col-sm-4 text-center" style="height:500px">
-	      <h2><%= product.title %></h2>
-	    	<%=image_tag product.image, :class=>"img-responsive" %>
-	    	<br/>	    	
-	    	<span class="price"> <s><%= product.unitprice %></s> </span> 
-	    	<span class="sale"> <%= product.unitprice*(100-product.promotion)/100 %> </span>
-	    	<br/>
-			only <%= product.stock %> Left
-			<br/>
-			<span class="sale">SALE UP TO <%= product.promotion %> % </span>
-			<br/>		
-			<h4>Before: <%= product.p_end.to_time.strftime('%a %b %d, %Y %H:%M:%S') %></h4>
+	<div class="panel panel-default">
+		<div class="panel-body">
+		      <h2><%= product.title %></h2>
+		    	<%=image_tag product.image, :class=>"img-responsive img-thumbnail" %>
+		    	<br/>
+				<div class="row">	
+					<div class="col-sm-12 padtp10">    	
+				    	<span class="price pull-left"> <s><%= product.unitprice %></s><small>THB</small></span> 
+				    	<span class="sale pull-left"><%= product.unitprice*(100-product.promotion)/100 %> </span>	    	
+						<span class="promo badge pull-right">- <%= product.promotion %>%</span>
+					</div>
+				</div>
+				<h4 class="blue">Before: <%= product.p_end.to_time.strftime('%a %b %d, %Y %H:%M:%S') %></h4>
+				only <%= product.stock %> Left
+		</div>
+	</div>
  	</div>
 
 <% end %>

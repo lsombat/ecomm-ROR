@@ -15,5 +15,9 @@
  */
  
  .padtp50 { margin-top: 50px; }
- .sale { font-size: 40px; color: red; }
- .price { font-size: 30px; color: blue; }
+ .padtp10 { padding-top: 10px; }
+ .promo { font-size: 30px; color: #fff; }
+ .sale { font-size: 25px; color: red; }
+ .price { font-size: 18px; color: #888; }
+ .badge { background-color: red; }
+ .blue { color: blue; }
