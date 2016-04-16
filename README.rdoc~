@@ -1,5 +1,3 @@
-https://morning-island-8324.herokuapp.com/
-
 $ bundle install
 
 $ rake db:create
